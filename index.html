@@ -1,0 +1,314 @@
+{{left_sidebar_enabled,right_sidebar_enabled=False,('message' in globals())}}
+{{extend 'layout.html'}}
+
+
+
+
+<script src="{{=URL('static','js/raphael-min.js')}}"></script>
+
+ <input type= 'button' id= 'boton_ON' value= "ON">
+ <input type= 'button' id= 'boton_OFF' value= "OFF">
+
+
+<script language="javascript">
+	function temporizador_botones(){
+
+			jQuery.post("{{=URL('default','temporizador_para_consulta.json')}}", {contentType: 'application/json'} )
+			 	
+			 	 .done(function(dic) { 
+					 window.console.log(dic)
+						if (dic["led"]== 0)
+							{
+							jQuery("#led").attr("style","fill:red");
+							jQuery("#boton_ON").show();
+							jQuery("#boton_OFF").hide();	
+							}
+						if (dic["led"]== 1)
+							{
+							jQuery("#led").attr("style","fill:green");
+							jQuery("#boton_ON").hide();
+							jQuery("#boton_OFF").show();	
+							}
+						if (dic["temperatura"]> 0)
+							{
+							jQuery("#termometro").attr('height',(dic["temperatura"]/10));
+							}	
+
+						if (dic["puerta"]== 0)
+							{
+							jQuery("#puerta").attr("style","fill:white");
+							jQuery("#boton_puerta").attr("style","fill:white");
+							jQuery("#tspan3036").show();
+							}				
+								
+						if (dic["puerta"]== 1)
+							{
+							jQuery("#puerta").attr("style","fill:#800000");
+							jQuery("#boton_puerta").attr("style","fill:#000000");
+							jQuery("#tspan3036").hide();
+							}
+						if (dic["puerto"]==0)
+							{
+							jQuery("#arduino").attr("style","fill:red");
+							
+							}
+						if (dic["puerto"]==1)
+							{
+							jQuery("#arduino").attr("style","fill:green");
+
+							}										
+									});	
+									
+									
+								}
+
+jQuery(document).ready(function()
+	{	
+
+	jQuery('#boton_ON').click(function(){
+			jQuery.post("{{=URL('default','led_ON.json')}}", {contentType: 'application/json'} )
+			});
+			
+	jQuery('#boton_OFF').click(function(){
+			jQuery.post("{{=URL('default','led_OFF.json')}}", {contentType: 'application/json'} )
+			});	
+			
+	window.setInterval(temporizador_botones,1002);
+	
+	});
+
+</script>
+ 
+<svg
+   width="300mm"
+   height="90mm"
+   id="svg2"
+  <g
+     inkscape:label="Capa 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <path
+       sodipodi:type="arc"
+       style="fill:#000000;fill-opacity:1"
+#      id="led"
+       sodipodi:cx="93.743675"
+       sodipodi:cy="154.24529"
+       sodipodi:rx="38.458946"
+       sodipodi:ry="34.252499"
+       d="m 132.20262,154.24529 a 38.458946,34.252499 0 1 1 -76.917891,0 38.458946,34.252499 0 1 1 76.917891,0 z" />
+    <text
+       xml:space="preserve"
+       style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none;font-family:Sans"
+       x="82.32618"
+       y="166.26372"
+       id="text2987"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan2989"
+         x="82.32618"
+         y="166.26372">L</tspan></text>
+    <path
+       sodipodi:type="arc"
+       style="fill:#08000;fill-opacity:1"
+       id="path2986"
+       sodipodi:cx="278.79263"
+       sodipodi:cy="238.92525"
+       sodipodi:rx="35.543285"
+       sodipodi:ry="32.211102"
+       d="m 314.33592,238.92525 a 35.543285,32.211102 0 1 1 -71.08657,0 35.543285,32.211102 0 1 1 71.08657,0 z" />
+    <rect
+       style="fill:#000000;fill-opacity:1"
+       id="trect2995"
+       width="28.87892"
+       height="144.39459"
+       x="264.35318"
+       y="86.755562" />
+    <rect
+       style="fill:#ff0000;fill-opacity:1"
+#      id="rojo"
+       width="12.566449"
+       height="148"
+       x="272.53485"
+       y="93.68141" />    
+    <rect
+       style="fill:#ffffff;fill-opacity:1"
+#      id="termometro"
+       width="12.566449"
+       height="163.36383"
+       x="272.53485"
+       y="93.68141" />   
+    <rect
+       style="fill:#800000;fill-opacity:1"
+#      id="puerta"
+       width="110.74183"
+       height="184.56972"
+       x="417.83444"
+       y="88.774544" />
+    <rect
+       style="fill:#000000;fill-opacity:1"
+       id="rect2996"
+       width="19.437719"
+       height="186.60225"
+       x="413.74606"
+       y="87.310928" />
+    <rect
+       style="fill:#000000;fill-opacity:1"
+       id="rect2998"
+       width="121.06931"
+       height="14.43946"
+       x="413.1907"
+       y="77.314377" />
+    <rect
+       style="fill:#000000;fill-opacity:1"
+       id="rect2996-0"
+       width="19.437719"
+       height="186.60225"
+       x="513.98926"
+       y="87.310928" />
+    <path
+       sodipodi:type="arc"
+       style="fill:#000000;fill-opacity:1"
+#      id="boton_puerta"
+       sodipodi:cx="497.05063"
+       sodipodi:cy="210.6017"
+       sodipodi:rx="7.2197299"
+       sodipodi:ry="4.9982743"
+       d="m 504.27036,210.6017 a 7.2197299,4.9982743 0 1 1 -14.43946,0 7.2197299,4.9982743 0 1 1 14.43946,0 z" />
+    <flowRoot
+       xml:space="preserve"
+      id="hi3"
+       style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none;font-family:Sans"><flowRegion
+         id="flowRegion3028"><rect
+           id="rect3030"
+           width="64.422203"
+           height="67.754387"
+           x="438.73743"
+           y="114.52376" /></flowRegion><flowPara
+       id="Hi1">Hi!!</flowPara></flowRoot>    <text
+       xml:space="preserve"
+       style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       x="443.18033"
+       y="133.40611"
+       id="hi"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+#        id="tspan3036"
+         x="443.18033"
+         y="133.40611">HI!</tspan></text>
+  </g>
+</svg>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   id="svg2"
+   version="1.1"
+   inkscape:version="0.48.4 r9939"
+   width="62"
+   height="22"
+   sodipodi:docname="32px-Arduino_Logo.svg.png">
+  <metadata
+     id="metadata8">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs6" />
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1364"
+     inkscape:window-height="718"
+     id="namedview4"
+     showgrid="false"
+     inkscape:zoom="3.5664075"
+     inkscape:cx="59.902112"
+     inkscape:cy="5.5878018"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg2" />
+  <image
+     width="62"
+     height="22"
+     xlink:href="data:image/png;base64,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
+0+kXrP8BtshewXviNU4AAAAASUVORK5CYII=
+"
+     id="image10"
+     x="0"
+     y="0" />
+  <rect
+     style="fill:#ffffff;fill-opacity:1"
+     id="rect2989"
+     width="26.299379"
+     height="21.752291"
+     x="34.656193"
+     y="0.24770932" />
+  <path
+     sodipodi:type="arc"
+     style="fill:#099080;fill-opacity:1"
+     id="arduino"
+     sodipodi:cx="48.604694"
+     sodipodi:cy="11.185302"
+     sodipodi:rx="12.473771"
+     sodipodi:ry="10.56891"
+     d="m 61.078465,11.185302 a 12.473771,10.56891 0 1 1 -24.947542,0 12.473771,10.56891 0 1 1 24.947542,0 z"
+     transform="matrix(0.89884583,0,0,1,3.6547935,0)" />
+</svg>
+
+
+
+
