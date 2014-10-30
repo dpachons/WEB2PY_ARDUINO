@@ -47,7 +47,7 @@
 							jQuery("#boton_puerta").attr("style","fill:#000000");
 							jQuery("#tspan3036").hide();
 							}
-						if (dic["puerto"]==0)
+						if (dic["puerto"]==3)
 							{
 							jQuery("#arduino").attr("style","fill:red");
 							
@@ -73,7 +73,7 @@ jQuery(document).ready(function()
 			jQuery.post("{{=URL('default','led_OFF.json')}}", {contentType: 'application/json'} )
 			});	
 			
-	window.setInterval(temporizador_botones,1002);
+	window.setInterval(temporizador_botones,500);
 	
 	});
 
