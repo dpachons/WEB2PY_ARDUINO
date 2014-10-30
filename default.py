@@ -42,16 +42,22 @@ def led_OFF():
 	
 def temporizador_para_consulta():
 	global puerto
-	datos=[]
-	datos=puerto_Serie.readline()
-	time.sleep(0.2)
-	
-	led_recibido=datos[9]
-	puerta_recibido=datos[20]
-	temperatura_recibido=datos[35:]
+	if puerto !=3:
+		datos=[]
+		datos=puerto_Serie.readline()
+		time.sleep(0.2)
+		
+		led_recibido=datos[9]
+		puerta_recibido=datos[20]
+		temperatura_recibido=datos[35:]
 
-	dic={"led":int(led_recibido), "puerta":int(puerta_recibido),"temperatura":int(temperatura_recibido),'puerto':puerto}
-	return dic
+		dic={"led":int(led_recibido), "puerta":int(puerta_recibido),"temperatura":int(temperatura_recibido),'puerto':puerto}
+		return dic
+	else:
+		#si no comunica,al menos que llegen datos para evitar error al hacer la peticion POST#	
+		dic={"led":0, "puerta":0,"temperatura":10,'puerto':3}
+		return dic
+
 	
 
 
